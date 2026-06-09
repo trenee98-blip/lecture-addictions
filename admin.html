@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>דשבורד ניהול – הרצאת התמכרויות</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1a3a5c;
+      --accent: #e8a020;
+      --bg: #f0f4f9;
+      --white: #ffffff;
+      --text: #1e2b3a;
+      --text-light: #5a6a7a;
+      --border: #dde6f0;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --sidebar-w: 240px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* LOGIN */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f2440, #1a3a5c);
+    }
+
+    .login-box {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .login-logo {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+    }
+
+    .login-box h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .login-box p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .login-input:focus { border-color: var(--accent); }
+
+    .login-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-btn:hover { background: #0f2440; }
+
+    #login-error {
+      color: var(--danger);
+      font-size: 0.88rem;
+      margin-top: 10px;
+    }
+
+    /* LAYOUT */
+    #app { display: none; }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 28px 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-header .logo-icon { font-size: 1.8rem; }
+
+    .sidebar-header h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    .sidebar-header p {
+      font-size: 0.75rem;
+      color: #7a9ab8;
+      margin-top: 2px;
+    }
+
+    .nav {
+      flex: 1;
+      padding: 20px 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      font-size: 0.92rem;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background 0.15s;
+      color: #a8c4dc;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .nav-item .nav-icon { font-size: 1.1rem; width: 20px; }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logout-btn {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      color: #a8c4dc;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: background 0.2s;
+    }
+
+    .logout-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+    /* MAIN */
+    .main {
+      margin-right: var(--sidebar-w);
+      flex: 1;
+      padding: 32px;
+      overflow-y: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .topbar h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .refresh-btn {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: box-shadow 0.2s;
+    }
+
+    .refresh-btn:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+    .export-btn {
+      background: var(--accent);
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--primary);
+      transition: box-shadow 0.2s;
+    }
+
+    .export-btn:hover { box-shadow: 0 4px 14px rgba(232,160,32,0.4); }
+
+    /* STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 22px 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .stat-icon {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    /* TABLE */
+    .table-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .table-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .search-input {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+      width: 220px;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus { border-color: var(--accent); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: #f7f9fc;
+      padding: 12px 20px;
+      text-align: right;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f7f9fc; }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: #e8f5e9;
+      color: #1b7e30;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+    }
+
+    .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+
+    #loading {
+      text-align: center;
+      padding: 48px;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .sidebar { display: none; }
+      .main { margin-right: 0; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🔐</div>
+    <h2>כניסה לניהול</h2>
+    <p>הרצאת עולם ההתמכרויות</p>
+    <input class="login-input" type="email" id="login-user" placeholder="אימייל" />
+    <input class="login-input" type="password" id="login-pass" placeholder="סיסמה" onkeydown="if(event.key==='Enter') doLogin()" />
+    <button class="login-btn" onclick="doLogin()">כניסה</button>
+    <div id="login-error"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">🧠</div>
+        <h1>ניהול הרצאה</h1>
+        <p>עולם ההתמכרויות</p>
+      </div>
+      <nav class="nav">
+        <div class="nav-item active" onclick="showView('registrations')">
+          <span class="nav-icon">📋</span> נרשמים
+        </div>
+        <div class="nav-item" onclick="showView('stats')">
+          <span class="nav-icon">📊</span> סטטיסטיקות
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="doLogout()">🚪 יציאה</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="topbar">
+        <h2 id="view-title">נרשמים להרצאה</h2>
+        <div class="topbar-right">
+          <button class="refresh-btn" onclick="loadData()">🔄 רענון</button>
+          <button class="export-btn" onclick="exportCSV()">⬇ ייצוא CSV</button>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-label">סה"כ נרשמים</div>
+          <div class="stat-value" id="stat-total">–</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-label">נרשמו היום</div>
+          <div class="stat-value" id="stat-today">–</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📞</div>
+          <div class="stat-label">עם טלפון</div>
+          <div class="stat-value" id="stat-phone">–</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-label">יעד</div>
+          <div class="stat-value">200</div>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-card">
+        <div class="table-header">
+          <h3>רשימת נרשמים</h3>
+          <input class="search-input" type="text" placeholder="🔍 חיפוש..." oninput="filterTable(this.value)" />
+        </div>
+        <div id="loading">טוען נתונים...</div>
+        <div id="table-wrap" style="display:none; overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>שם</th>
+                <th>אימייל</th>
+                <th>טלפון</th>
+                <th>תאריך הרשמה</th>
+                <th>סטטוס</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+          <div id="empty-state" class="empty-state" style="display:none">
+            <div class="empty-icon">📭</div>
+            <p>לא נמצאו נרשמים</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const { createClient } = supabase;
+  const sb = createClient(
+    'https://pruogkxvrvighbezokgu.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM'
+  );
+
+  // --- AUTH via Supabase ---
+  async function doLogin() {
+    const email = document.getElementById('login-user').value.trim();
+    const pass  = document.getElementById('login-pass').value;
+    const btn   = document.querySelector('.login-btn');
+    const errEl = document.getElementById('login-error');
+
+    btn.disabled = true;
+    btn.textContent = 'מתחבר...';
+    errEl.textContent = '';
+
+    const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+
+    btn.disabled = false;
+    btn.textContent = 'כניסה';
+
+    if (error) {
+      errEl.textContent = 'אימייל או סיסמה שגויים';
+    } else {
+      showApp();
+    }
+  }
+
+  async function doLogout() {
+    await sb.auth.signOut();
+    location.reload();
+  }
+
+  function showApp() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadData();
+  }
+
+  // check existing session on load
+  sb.auth.getSession().then(({ data }) => {
+    if (data.session) showApp();
+  });
+
+  // --- DATA ---
+  let allRows = [];
+
+  async function loadData() {
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('table-wrap').style.display = 'none';
+
+    const { data, error } = await sb
+      .from('registrations')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('table-wrap').style.display = 'block';
+
+    if (error) { alert('שגיאה בטעינת הנתונים: ' + error.message); return; }
+
+    allRows = data || [];
+    updateStats(allRows);
+    renderTable(allRows);
+  }
+
+  function updateStats(rows) {
+    const today = new Date().toISOString().slice(0, 10);
+    document.getElementById('stat-total').textContent = rows.length;
+    document.getElementById('stat-today').textContent = rows.filter(r => r.created_at?.startsWith(today)).length;
+    document.getElementById('stat-phone').textContent = rows.filter(r => r.phone).length;
+  }
+
+  function renderTable(rows) {
+    const tbody = document.getElementById('table-body');
+    const empty = document.getElementById('empty-state');
+
+    if (rows.length === 0) {
+      tbody.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+
+    tbody.innerHTML = rows.map((r, i) => `
+      <tr>
+        <td style="color:var(--text-light)">${i + 1}</td>
+        <td><strong>${esc(r.name)}</strong></td>
+        <td><a href="mailto:${esc(r.email)}" style="color:var(--primary); text-decoration:none;">${esc(r.email)}</a></td>
+        <td>${r.phone ? `<a href="tel:${esc(r.phone)}" style="color:var(--primary); text-decoration:none;">${esc(r.phone)}</a>` : '<span style="color:#aaa">–</span>'}</td>
+        <td>${formatDate(r.created_at)}</td>
+        <td><span class="badge">✓ נרשם</span></td>
+      </tr>`).join('');
+  }
+
+  function filterTable(q) {
+    const filtered = allRows.filter(r =>
+      [r.name, r.email, r.phone].some(v => v && v.toLowerCase().includes(q.toLowerCase()))
+    );
+    renderTable(filtered);
+  }
+
+  function exportCSV() {
+    if (!allRows.length) { alert('אין נתונים לייצוא'); return; }
+    const header = ['שם', 'אימייל', 'טלפון', 'תאריך הרשמה'];
+    const rows = allRows.map(r => [r.name, r.email, r.phone || '', formatDate(r.created_at)]);
+    const csv = '﻿' + [header, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+    a.download = 'registrations.csv';
+    a.click();
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '–';
+    const d = new Date(iso);
+    return d.toLocaleDateString('he-IL') + ' ' + d.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function showView(v) {
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
+
+  // auto-refresh every 60 seconds
+  setInterval(() => { if (sessionStorage.getItem('admin_ok')) loadData(); }, 60000);
+</script>
+</body>
+</html>
