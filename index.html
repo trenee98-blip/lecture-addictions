@@ -3,89 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>הרצאה: עולם ההתמכרויות – הבנה, מניעה והתמודדות</title>
+  <title>המסע למימד הבא – חיים מתוך בחירה ולא מתוך בריחה | ריני טוויל</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #1a3a5c;
-      --accent: #e8a020;
-      --accent-light: #f5c96a;
-      --bg: #f7f9fc;
-      --text: #1e2b3a;
-      --text-light: #5a6a7a;
-      --white: #ffffff;
-      --section-bg: #edf2f7;
+      --deep:    #0a0e2e;
+      --navy:    #0d1f4e;
+      --teal:    #0ea5c8;
+      --teal2:   #06d6a0;
+      --gold:    #f5a623;
+      --gold2:   #ffe083;
+      --magenta: #c026d3;
+      --bg:      #f4f0ff;
+      --card:    #ffffff;
+      --text:    #1a1040;
+      --muted:   #5b5480;
+      --border:  #e0d9f5;
     }
 
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800;900&display=swap');
+
     body {
-      font-family: 'Segoe UI', 'Arial', sans-serif;
+      font-family: 'Heebo', 'Segoe UI', Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
     }
 
-    /* HERO */
+    /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(135deg, #0f2440 0%, #1a3a5c 60%, #1e4d7a 100%);
-      color: var(--white);
-      padding: 80px 20px 100px;
-      text-align: center;
       position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px 80px;
       overflow: hidden;
+      color: #fff;
     }
 
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 70% 40%, rgba(232,160,32,0.15) 0%, transparent 65%);
+      background-image: url('605542703_872112235806877_5535368306321699586_n.jpg');
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.18) saturate(1.0);
+      z-index: 0;
     }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 55%, rgba(245,166,35,0.08) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(5,8,30,0.7) 0%, rgba(5,8,30,0.85) 100%);
+      z-index: 1;
+    }
+
+    .hero > * { position: relative; z-index: 2; }
 
     .hero-tag {
       display: inline-block;
-      background: var(--accent);
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      padding: 6px 18px;
-      border-radius: 20px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      color: var(--deep);
+      font-weight: 800;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      padding: 7px 22px;
+      border-radius: 30px;
       margin-bottom: 28px;
-      text-transform: uppercase;
+      box-shadow: 0 4px 18px rgba(245,166,35,0.45);
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      position: relative;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 22px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
     }
 
     .hero h1 span {
-      color: var(--accent-light);
+      background: linear-gradient(90deg, var(--gold), var(--teal2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero p.subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: #c8d8e8;
-      max-width: 680px;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255,255,255,0.95);
+      max-width: 660px;
       margin: 0 auto 40px;
-      position: relative;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
     }
 
     .hero-meta {
       display: flex;
       justify-content: center;
-      gap: 36px;
+      gap: 28px;
       flex-wrap: wrap;
-      margin-bottom: 48px;
-      position: relative;
+      margin-bottom: 44px;
     }
 
     .hero-meta-item {
@@ -93,168 +115,197 @@
       align-items: center;
       gap: 8px;
       font-size: 1rem;
-      color: #c8d8e8;
+      color: #fff;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 30px;
+      padding: 8px 18px;
+      backdrop-filter: blur(6px);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
 
-    .hero-meta-item .icon {
-      font-size: 1.3rem;
-    }
+    .hero-meta-item .icon { font-size: 1.2rem; }
 
     .cta-btn {
       display: inline-block;
-      background: var(--accent);
-      color: var(--primary);
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding: 16px 44px;
+      background: linear-gradient(135deg, var(--gold), #ff8c00);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 17px 52px;
       border-radius: 50px;
       text-decoration: none;
-      box-shadow: 0 8px 24px rgba(232,160,32,0.35);
+      box-shadow: 0 8px 32px rgba(245,166,35,0.5);
       transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
+      letter-spacing: 0.02em;
     }
 
     .cta-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 32px rgba(232,160,32,0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(245,166,35,0.6);
     }
 
     .cta-sub {
-      margin-top: 14px;
+      margin-top: 16px;
       font-size: 0.9rem;
-      color: #8aacc8;
-      position: relative;
+      color: rgba(255,255,255,0.6);
     }
 
-    /* WAVE DIVIDER */
-    .wave {
-      display: block;
-      width: 100%;
-      height: 60px;
-      margin-top: -2px;
-    }
+    /* WAVE */
+    .wave { display: block; width: 100%; height: 60px; margin-top: -2px; }
 
-    /* SECTION */
-    section {
-      padding: 72px 20px;
-    }
+    /* ===== SECTIONS ===== */
+    section { padding: 80px 20px; }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1000px; margin: 0 auto; }
 
     .section-label {
       font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-weight: 800;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--accent);
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 10px;
+      display: inline-block;
     }
 
     h2 {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 800;
-      color: var(--primary);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      color: var(--text);
       margin-bottom: 14px;
+      line-height: 1.2;
     }
 
     .section-intro {
-      color: var(--text-light);
+      color: var(--muted);
       font-size: 1.05rem;
       max-width: 640px;
       margin-bottom: 52px;
     }
 
-    /* TOPICS GRID */
+    /* ===== TOPICS ===== */
+    .topics-section { background: var(--bg); }
+
     .topics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 22px;
     }
 
     .topic-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 28px 26px;
-      border: 1px solid #dde6f0;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--card);
+      border-radius: 20px;
+      padding: 30px 26px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(100,60,200,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 6px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--teal));
+      border-radius: 0 20px 20px 0;
     }
 
     .topic-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 14px 36px rgba(100,60,200,0.14);
     }
 
-    .topic-icon {
-      font-size: 2.2rem;
-      margin-bottom: 14px;
-    }
+    .topic-icon { font-size: 2.4rem; margin-bottom: 14px; }
 
     .topic-card h3 {
       font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary);
+      font-weight: 800;
+      color: var(--text);
       margin-bottom: 8px;
     }
 
-    .topic-card p {
-      font-size: 0.93rem;
-      color: var(--text-light);
+    .topic-card p { font-size: 0.93rem; color: var(--muted); }
+
+    /* ===== SPEAKER ===== */
+    .speaker-section {
+      background: linear-gradient(135deg, var(--deep) 0%, #0d1b4b 100%);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* SPEAKER */
-    .speaker-section {
-      background: var(--section-bg);
+    .speaker-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(14,165,200,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 50%, rgba(245,166,35,0.1) 0%, transparent 60%);
     }
+
+    .speaker-section h2 { color: #fff; }
+    .speaker-section .section-intro { color: rgba(255,255,255,0.65); }
 
     .speaker-card {
       display: flex;
       align-items: center;
-      gap: 40px;
-      background: var(--white);
-      border-radius: 20px;
-      padding: 40px;
-      border: 1px solid #dde6f0;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+      gap: 44px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 24px;
+      padding: 44px;
+      backdrop-filter: blur(10px);
       flex-wrap: wrap;
+      position: relative;
     }
 
     .speaker-avatar {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), #2a6496);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3.2rem;
+      overflow: hidden;
       flex-shrink: 0;
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 0 6px rgba(245,166,35,0.18), 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .speaker-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .speaker-info h3 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary);
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: #fff;
       margin-bottom: 4px;
     }
 
     .speaker-title {
-      color: var(--accent);
       font-weight: 600;
       font-size: 0.95rem;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      background: linear-gradient(90deg, var(--gold), var(--teal2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .speaker-bio {
-      color: var(--text-light);
+      color: rgba(255,255,255,0.75);
       font-size: 0.97rem;
-      max-width: 580px;
+      max-width: 560px;
+      line-height: 1.75;
     }
 
-    /* TESTIMONIALS */
+    /* ===== TRANSFORMATION ===== */
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -262,222 +313,191 @@
     }
 
     .testimonial-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 28px;
-      border: 1px solid #dde6f0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      background: var(--card);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 18px rgba(100,60,200,0.07);
     }
 
-    .stars {
-      color: var(--accent);
-      font-size: 1.1rem;
-      margin-bottom: 14px;
-    }
+    .stars { font-size: 1.2rem; margin-bottom: 14px; }
 
     .testimonial-text {
-      font-size: 0.97rem;
+      font-size: 1rem;
       color: var(--text);
       font-style: italic;
       margin-bottom: 18px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    .testimonial-author {
+    .testimonial-author { font-weight: 800; font-size: 0.92rem; color: var(--text); }
+    .testimonial-role { font-size: 0.82rem; color: var(--muted); }
+
+    /* ===== DETAILS ===== */
+    .details-section {
+      background: linear-gradient(135deg, #f0ebff 0%, #e8f7ff 100%);
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 18px;
+    }
+
+    .detail-item {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 26px 18px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(100,60,200,0.08);
+      transition: transform 0.2s;
+    }
+
+    .detail-item:hover { transform: translateY(-4px); }
+
+    .detail-item .d-icon { font-size: 2.2rem; margin-bottom: 10px; }
+
+    .detail-item .d-label {
+      font-size: 0.75rem;
+      color: var(--muted);
       font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
     }
 
-    .testimonial-role {
-      font-size: 0.82rem;
-      color: var(--text-light);
+    .detail-item .d-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.4;
     }
 
-    /* REGISTER FORM */
+    /* ===== REGISTER ===== */
     .register-section {
-      background: linear-gradient(135deg, var(--primary) 0%, #1e4d7a 100%);
-      color: var(--white);
+      background: linear-gradient(135deg, var(--deep) 0%, #1a0a40 50%, #0d1b4b 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
     }
 
-    .register-section h2 {
-      color: var(--white);
+    .register-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(192,38,211,0.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 40%, rgba(14,165,200,0.15) 0%, transparent 55%);
     }
 
-    .register-section .section-label {
-      color: var(--accent-light);
-    }
-
-    .register-section .section-intro {
-      color: #a8c4dc;
-    }
+    .register-section h2 { color: #fff; position: relative; }
+    .register-section .section-intro { color: rgba(255,255,255,0.65); position: relative; }
+    .register-section .section-label { position: relative; }
 
     .form-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 20px;
-      padding: 40px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 24px;
+      padding: 44px;
       max-width: 560px;
       margin: 0 auto;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(12px);
+      position: relative;
     }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+    .form-group { margin-bottom: 20px; }
 
     .form-group label {
       display: block;
       font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 7px;
-      color: #c8d8e8;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: rgba(255,255,255,0.85);
     }
 
-    .form-group input,
-    .form-group select {
+    .form-group input {
       width: 100%;
-      padding: 13px 16px;
-      border-radius: 10px;
+      padding: 14px 18px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.2);
       background: rgba(255,255,255,0.1);
-      color: var(--white);
+      color: #fff;
       font-size: 1rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
     }
 
-    .form-group input::placeholder {
-      color: #7a9ab8;
-    }
+    .form-group input::placeholder { color: rgba(255,255,255,0.45); }
 
-    .form-group input:focus,
-    .form-group select:focus {
-      border-color: var(--accent);
-    }
-
-    .form-group select option {
-      color: var(--text);
-      background: var(--white);
+    .form-group input:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.14);
     }
 
     .submit-btn {
       width: 100%;
-      background: var(--accent);
-      color: var(--primary);
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding: 15px;
+      background: linear-gradient(135deg, var(--gold), #ff8c00);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 16px;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      margin-top: 8px;
-      box-shadow: 0 6px 20px rgba(232,160,32,0.35);
+      margin-top: 10px;
+      box-shadow: 0 8px 28px rgba(245,166,35,0.45);
       transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.02em;
     }
 
     .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(232,160,32,0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(245,166,35,0.55);
     }
 
     .form-note {
       text-align: center;
       margin-top: 14px;
       font-size: 0.85rem;
-      color: #7a9ab8;
+      color: rgba(255,255,255,0.45);
     }
 
-    /* EVENT DETAILS */
-    .details-section {
-      background: var(--section-bg);
-    }
-
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .detail-item {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 26px 22px;
-      text-align: center;
-      border: 1px solid #dde6f0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .detail-item .d-icon {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-
-    .detail-item .d-label {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-    }
-
-    .detail-item .d-value {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    /* FAQ */
-    .faq-list {
-      max-width: 720px;
-    }
+    /* ===== FAQ ===== */
+    .faq-list { max-width: 720px; }
 
     .faq-item {
-      border-bottom: 1px solid #dde6f0;
-      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
     }
 
-    .faq-item:first-child {
-      border-top: 1px solid #dde6f0;
-    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
 
     .faq-q {
-      font-weight: 700;
-      color: var(--primary);
+      font-weight: 800;
+      color: var(--text);
       font-size: 1rem;
       margin-bottom: 8px;
     }
 
-    .faq-a {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
+    .faq-a { color: var(--muted); font-size: 0.95rem; }
 
-    /* FOOTER */
+    /* ===== FOOTER ===== */
     footer {
-      background: var(--primary);
-      color: #7a9ab8;
+      background: var(--deep);
+      color: rgba(255,255,255,0.4);
       text-align: center;
       padding: 32px 20px;
       font-size: 0.88rem;
     }
 
-    footer a {
-      color: var(--accent-light);
-      text-decoration: none;
-    }
+    footer a { color: var(--gold2); text-decoration: none; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
-      .speaker-card {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-meta {
-        flex-direction: column;
-        gap: 14px;
-        align-items: center;
-      }
+      .speaker-card { flex-direction: column; text-align: center; }
+      .hero-meta { flex-direction: column; gap: 10px; align-items: center; }
+      .form-card { padding: 28px 20px; }
     }
   </style>
 </head>
@@ -485,61 +505,64 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">🎙 הרצאה מיוחדת</div>
-  <h1>עולם ההתמכרויות:<br/><span>הבנה, מניעה והתמודדות</span></h1>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-tag">✨ הרצאה מס׳ 1 – המסע למימד הבא</div>
+  <h1>לָמָּה מְכוֹרִים<br/><span>וְלָמָּה?</span></h1>
   <p class="subtitle">
-    הרצאה מרתקת ומעשית שתפתח לכם עיניים לגבי מנגנוני ההתמכרות, הסימנים המוקדמים ודרכי הסיוע
+    סדנה שתעזור לכם להבין איך מנגנוני ההישרדות שלנו מובילים להתמכרויות יומיומיות –
+    ואיך אפשר לחיות אחרת, מתוך מודעות, חופש ובחירה אמיתית
   </p>
   <div class="hero-meta">
-    <div class="hero-meta-item"><span class="icon">📅</span> יום שלישי, 30 ביוני 2026</div>
-    <div class="hero-meta-item"><span class="icon">🕖</span> 18:30 – 21:00</div>
-    <div class="hero-meta-item"><span class="icon">📍</span> מרכז הכנסים, תל אביב</div>
-    <div class="hero-meta-item"><span class="icon">👥</span> מקומות מוגבלים</div>
+    <div class="hero-meta-item"><span class="icon">📅</span> יום רביעי, 24 ביוני 2026</div>
+    <div class="hero-meta-item"><span class="icon">🕗</span> 20:00</div>
+    <div class="hero-meta-item"><span class="icon">💰</span> 50 ₪ בלבד</div>
+    <div class="hero-meta-item"><span class="icon">💻</span> זום – מכל מקום בארץ</div>
   </div>
-  <a href="#register" class="cta-btn">הרשמה עכשיו – ללא עלות</a>
-  <p class="cta-sub">✓ כניסה חופשית &nbsp;·&nbsp; ✓ תעודת השתתפות &nbsp;·&nbsp; ✓ חומרי עזר דיגיטליים</p>
+  <a href="#register" class="cta-btn">אני רוצה להירשם ←</a>
+  <p class="cta-sub">✓ השקעה של 50 ₪ &nbsp;·&nbsp; ✓ כלים מעשיים לקחת הביתה &nbsp;·&nbsp; ✓ מקומות מוגבלים</p>
 </section>
 
 <svg class="wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-  <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f7f9fc"/>
+  <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f4f0ff"/>
 </svg>
 
 <!-- TOPICS -->
 <section>
   <div class="container">
-    <p class="section-label">נושאי ההרצאה</p>
-    <h2>מה נלמד יחד?</h2>
-    <p class="section-intro">ההרצאה מכסה את כל היבטי ההתמכרות – מהמדע שמאחוריה ועד לכלים מעשיים לעזרה ותמיכה.</p>
+    <p class="section-label">נושאי הסדנה</p>
+    <h2>מה נעבור יחד בערב הזה?</h2>
+    <p class="section-intro">סדנה שמביאה הבנה עמוקה של המנגנונים שמובילים להתמכרות – ודרך מעשית לצאת מהם.</p>
     <div class="topics-grid">
       <div class="topic-card">
-        <div class="topic-icon">🧠</div>
-        <h3>המוח וההתמכרות</h3>
-        <p>כיצד חומרים ופעולות משנים את מעגלי התגמול במוח ומדוע "רצון חזק" לבד אינו מספיק.</p>
+        <div class="topic-icon">🔎</div>
+        <h3>מה זו התמכרות באמת?</h3>
+        <p>לא רק סמים ואלכוהול – נבין יחד מה הופך התנהגות יומיומית להתמכרות ומה הסימנים שכדאי להכיר.</p>
       </div>
       <div class="topic-card">
-        <div class="topic-icon">🔍</div>
-        <h3>זיהוי סימנים מוקדמים</h3>
-        <p>אינדיקטורים התנהגותיים ורגשיים להתמכרות – אצל בני משפחה, חברים ועובדים.</p>
+        <div class="topic-icon">📱</div>
+        <h3>ההתמכרויות שאף אחד לא מדבר עליהן</h3>
+        <p>מסכים, מזון, מיטה, מין, מערכות יחסים ומחשבות – ה-6 בריחות שכולנו מכירים אבל לא מזהים.</p>
       </div>
       <div class="topic-card">
-        <div class="topic-icon">💊</div>
-        <h3>סוגי התמכרויות</h3>
-        <p>חומרים, אלכוהול, הימורים, מסכים ורשתות חברתיות – מה משותף ומה שונה בין כולם.</p>
+        <div class="topic-icon">🧬</div>
+        <h3>המנגנון הביולוגי – דופמין ובריחה מכאב</h3>
+        <p>איך המוח שלנו מחפש תגמול ובורח מאי-נוחות – ולמה "פשוט להפסיק" זה לא פתרון.</p>
       </div>
       <div class="topic-card">
-        <div class="topic-icon">🛡️</div>
-        <h3>גורמי סיכון ומגן</h3>
-        <p>גנטיקה, סביבה, טראומה והשפעת הסביבה החברתית על הסיכון לפתח התמכרות.</p>
+        <div class="topic-icon">🕊️</div>
+        <h3>התמכרות כמחלה רוחנית</h3>
+        <p>הניסוי עם העכברים, הבדידות והקשר – מה מחקרים מדעיים מלמדים אותנו על השורש האמיתי של ההתמכרות.</p>
       </div>
       <div class="topic-card">
-        <div class="topic-icon">🤝</div>
-        <h3>איך לעזור לאדם קרוב</h3>
-        <p>שיחות פתיחה, גבולות בריאים ודרכי הפניה לטיפול ללא אובדן הקשר.</p>
+        <div class="topic-icon">🌀</div>
+        <h3>שליטה, חוסר ודאות ובריחה</h3>
+        <p>מי שלא יכול להרפות שליטה בעולם לא ודאי – יברח. נבין איך לשחרר ולחיות בשלום עם הלא-נודע.</p>
       </div>
       <div class="topic-card">
-        <div class="topic-icon">🌱</div>
-        <h3>דרכי החלמה ומניעה</h3>
-        <p>גישות טיפוליות מבוססות ראיות, כולל CBT, מיינדפולנס ותמיכה קהילתית.</p>
+        <div class="topic-icon">💡</div>
+        <h3>מודעות = בחירה = חופש</h3>
+        <p>כיצד פיתוח מודעות לרגע הבריחה פותח בפנינו עולם של בחירות חדשות – וצעדים ראשונים מעשיים לשינוי.</p>
       </div>
     </div>
   </div>
@@ -548,16 +571,18 @@
 <!-- SPEAKER -->
 <section class="speaker-section">
   <div class="container">
-    <p class="section-label">המרצה</p>
-    <h2>היכרות עם המומחה</h2>
-    <p class="section-intro">הרצאה שמבוססת על שנים של מחקר, ניסיון קליני ועבודה מול אלפי אנשים ומשפחות.</p>
+    <p class="section-label">המנחה</p>
+    <h2>היכרות עם המנחה</h2>
+    <p class="section-intro">מדריכה שמלמדת מתוך חוויה אישית, חמלה ועומק – לא רק ידע תיאורטי.</p>
     <div class="speaker-card">
-      <div class="speaker-avatar">👨‍⚕️</div>
+      <div class="speaker-avatar">
+        <img src="_DSC0847_IJFR.jpg" alt="ריני טוויל" />
+      </div>
       <div class="speaker-info">
-        <h3>ד"ר אורי לוי</h3>
-        <div class="speaker-title">פסיכולוג קליני מומחה להתמכרויות | מנהל המרכז לבריאות הנפש, ת"א</div>
+        <h3>ריני טוויל</h3>
+        <div class="speaker-title">מנחה ומדריכה – "המסע למימד הבא" | חיים מתוך בחירה ולא מתוך בריחה</div>
         <p class="speaker-bio">
-          ד"ר לוי הוא פסיכולוג קליני בכיר עם למעלה מ-20 שנות ניסיון בתחום ההתמכרויות. הוא מרצה באוניברסיטת תל אביב, מחבר שלושה ספרים בנושא, ומעביר הרצאות ברחבי הארץ לאנשי מקצוע, מוסדות חינוכיים ולציבור הרחב.
+          אמא ל-5, גרושה, לשעבר דתייה – ומכורה לשעבר. עברתי תהליך גמילה אמיתי ממין, מערכות יחסים ורשתות חברתיות, ומתוך הכאב הזה גיליתי שהתמכרות היא לא חולשה – היא מנגנון הישרדות של גוף שלא יודע איך להכיל כאב. היום אני מתעוררת בשחר עם תחושת תודה, חיה מתוך בחירה ולא מתוך בריחה – ומביאה את המפה הזו לאנשים שמוכנים לצאת לדרך.
         </p>
       </div>
     </div>
@@ -567,27 +592,27 @@
 <!-- TESTIMONIALS -->
 <section>
   <div class="container">
-    <p class="section-label">מה אומרים המשתתפים</p>
-    <h2>קולות מהשטח</h2>
-    <p class="section-intro">אלפי אנשים כבר השתתפו בהרצאות – הנה מה שהם אמרו.</p>
+    <p class="section-label">הטרנספורמציה</p>
+    <h2>מאיפה אתם מגיעים – לאן תצאו</h2>
+    <p class="section-intro">הסדנה נבנתה כדי לייצר שינוי תפיסתי אמיתי, לא רק מידע.</p>
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">«ההרצאה שינתה לחלוטין את הדרך שבה אני מתייחסת לנושא. לבסוף הבנתי את הבן שלי ויכולתי להושיט לו יד אמיתית.»</p>
-        <div class="testimonial-author">מיכל ר'</div>
-        <div class="testimonial-role">אם ומחנכת, חיפה</div>
+        <div class="stars" style="color:#ef4444; font-size:1.4rem;">לפני ←</div>
+        <p class="testimonial-text">«תקיעות, בלבול ובריחה מהחיים – מסך, אוכל, שינה, מחשבות אובססיביות. תחושה שאתם מסוגלים ליותר אבל לא מצליחים להתניע.»</p>
+        <div class="testimonial-author">הנקודת פתיחה</div>
+        <div class="testimonial-role">חוסר יכולת לקבל החלטות, דחיינות, עומס רגשי</div>
       </div>
       <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">«כעובד סוציאלי ציפיתי לתכנים שאני כבר מכיר, אבל יצאתי עם כלים פרקטיים חדשים שלא פגשתי בשום מקום אחר.»</p>
-        <div class="testimonial-author">יוסי מ'</div>
-        <div class="testimonial-role">עובד סוציאלי, ירושלים</div>
+        <div class="stars" style="color:#22c55e; font-size:1.4rem;">← אחרי</div>
+        <p class="testimonial-text">«בהירות לגבי המנגנונים שמנהלים אתכם, כלים לזהות את רגע הבריחה – ובחירה מודעת לנהוג אחרת. תנועה, מיקוד וחיבור לעצמכם.»</p>
+        <div class="testimonial-author">הנקודת הגעה</div>
+        <div class="testimonial-role">מודעות, בחירה, מסוגלות וחופש פנימי</div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card" style="border: 2px solid #e8a020;">
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">«הצגתי את ד"ר לוי בפני צוות בית הספר שלנו – הוא מרתק, ברור ומעשי. כל מורה יצא עם ידע שישנה את ההתנהלות שלו בכיתה.»</p>
-        <div class="testimonial-author">שירה כ'</div>
-        <div class="testimonial-role">מנהלת בית ספר תיכון, ראשון לציון</div>
+        <p class="testimonial-text">«ההבטחה הגדולה: לחיות מתוך בחירה ולא מתוך בריחה. לקחת חזרה את ההגה על החיים שלכם – צעד אחד מודע בכל פעם.»</p>
+        <div class="testimonial-author">הבטחת הסדנה</div>
+        <div class="testimonial-role">חיים מתוך חיבור, תשוקה ואנרגיה</div>
       </div>
     </div>
   </div>
@@ -603,32 +628,32 @@
       <div class="detail-item">
         <div class="d-icon">📅</div>
         <div class="d-label">תאריך</div>
-        <div class="d-value">יום שלישי<br/>30.06.2026</div>
+        <div class="d-value">יום רביעי<br/>24.06.2026</div>
       </div>
       <div class="detail-item">
-        <div class="d-icon">🕖</div>
+        <div class="d-icon">🕗</div>
         <div class="d-label">שעה</div>
-        <div class="d-value">18:30 – 21:00<br/>(כולל הפסקה)</div>
+        <div class="d-value">20:00</div>
       </div>
       <div class="detail-item">
-        <div class="d-icon">📍</div>
-        <div class="d-label">מיקום</div>
-        <div class="d-value">מרכז הכנסים<br/>תל אביב-יפו</div>
+        <div class="d-icon">💻</div>
+        <div class="d-label">פלטפורמה</div>
+        <div class="d-value">זום (Zoom)<br/>מכל מקום בארץ</div>
       </div>
       <div class="detail-item">
         <div class="d-icon">🎟️</div>
-        <div class="d-label">כניסה</div>
-        <div class="d-value">חופשית לחלוטין<br/>בהרשמה מראש</div>
+        <div class="d-label">מחיר</div>
+        <div class="d-value">50 ₪<br/>בהרשמה מראש</div>
       </div>
       <div class="detail-item">
-        <div class="d-icon">📜</div>
-        <div class="d-label">תעודה</div>
-        <div class="d-value">תעודת השתתפות<br/>דיגיטלית</div>
+        <div class="d-icon">🧭</div>
+        <div class="d-label">שם הסדנה</div>
+        <div class="d-value">המסע<br/>למימד הבא</div>
       </div>
       <div class="detail-item">
-        <div class="d-icon">🅿️</div>
-        <div class="d-label">חנייה</div>
-        <div class="d-value">חנייה ציבורית<br/>בסמוך לאולם</div>
+        <div class="d-icon">👥</div>
+        <div class="d-label">מקומות</div>
+        <div class="d-value">מוגבלים<br/>הירשמו עכשיו</div>
       </div>
     </div>
   </div>
@@ -666,20 +691,20 @@
     <h2>יש לכם שאלות?</h2>
     <div class="faq-list">
       <div class="faq-item">
-        <div class="faq-q">האם ההרצאה מתאימה גם למי שאין לו רקע מקצועי?</div>
-        <div class="faq-a">בהחלט. ההרצאה מתאימה לכל אחד – הורים, מורים, מנהלים, ואנשים המעוניינים להבין את הנושא לעומק ולעזור לסביבתם.</div>
+        <div class="faq-q">למי הסדנה מתאימה?</div>
+        <div class="faq-a">לכל מי שמרגיש תקוע בלופים, בורח לטלפון, לאוכל, לשינה או לכל דבר אחר כדי לא להתמודד. לא צריך "בעיית התמכרות קשה" – מספיק שמשהו בחייכם מרגיש לא בשליטה.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">האם יהיה שידור מקוון?</div>
-        <div class="faq-a">ההרצאה תתקיים פרונטלית בלבד. נשתדל להעלות הקלטה חלקית לאחר האירוע לנרשמים.</div>
+        <div class="faq-q">האם זה מתאים גם למי שבא בשביל אדם קרוב שלו?</div>
+        <div class="faq-a">בהחלט. הורים, בני/בנות זוג, חברים – הסדנה תעזור לכם להבין מה קורה לאדם הקרוב אליכם ואיך להושיט יד בלי לאבד את עצמכם.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">האם ניתן להביא בני משפחה נוספים?</div>
-        <div class="faq-a">כן, כל משתתף צריך להירשם בנפרד כדי להבטיח את מקומו. הכניסה חופשית לכל הנרשמים.</div>
+        <div class="faq-q">האם ניתן להביא חברים נוספים?</div>
+        <div class="faq-a">כן! כל אחד צריך להירשם בנפרד. הכניסה חופשית לכולם – שתפו עם מי שחשבתם עליו בזמן הקריאה.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">מה מקבלים בסוף ההרצאה?</div>
-        <div class="faq-a">תעודת השתתפות דיגיטלית, מצגת ההרצאה, ומדריך מעשי לזיהוי ומניעת התמכרויות.</div>
+        <div class="faq-q">מה מקבלים בסיום הסדנה?</div>
+        <div class="faq-a">הבנה עמוקה של המנגנונים שמנהלים אתכם, כלים מעשיים לזיהוי רגע הבריחה, ומפת דרכים לשינוי – שלב אחד בכל פעם.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">כיצד ליצור קשר לשאלות נוספות?</div>
@@ -691,7 +716,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 הרצאות ד"ר אורי לוי &nbsp;|&nbsp; <a href="mailto:info@lecture-addiction.co.il">info@lecture-addiction.co.il</a> &nbsp;|&nbsp; כל הזכויות שמורות</p>
+  <p>© 2026 ריני טוויל – המסע למימד הבא &nbsp;|&nbsp; <a href="mailto:info@lecture-addiction.co.il">info@lecture-addiction.co.il</a> &nbsp;|&nbsp; כל הזכויות שמורות</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

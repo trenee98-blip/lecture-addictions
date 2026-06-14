@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תודה! – המסע למימד הבא</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: #06101F;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: rgba(240,192,64,0.06);
+      border: 1px solid rgba(240,192,64,0.3);
+      border-radius: 20px;
+      padding: 48px 36px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .emoji { font-size: 3.5rem; margin-bottom: 18px; }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #F0C040;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 28px 0;
+    }
+
+    .step {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+      text-align: right;
+    }
+
+    .step-title {
+      font-size: 0.85rem;
+      font-weight: 900;
+      color: #F0C040;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .step-text {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      border-radius: 10px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 12px;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.88; }
+
+    .btn-paybox {
+      background: #F0C040;
+      color: #06101F;
+    }
+
+    .btn-bit {
+      background: rgba(240,192,64,0.12);
+      border: 1px solid rgba(240,192,64,0.45);
+      color: #F0C040;
+    }
+
+    .btn-whatsapp-group {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .btn-whatsapp-chat {
+      background: rgba(37,211,102,0.1);
+      border: 1px solid #25D366;
+      color: #25D366;
+    }
+
+    .meeting-box {
+      background: rgba(240,192,64,0.08);
+      border: 1px solid rgba(240,192,64,0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 24px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.8;
+    }
+
+    .meeting-box strong { color: #F0C040; }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="emoji">✨</div>
+    <h1>תודה על ההצטרפות!</h1>
+    <p class="subtitle">
+      תודה על האמון וההצטרפות –<br/>
+      מתרגשת לצאת למסע הזה יחד 🙏
+    </p>
+
+    <!-- תשלום -->
+    <div class="step">
+      <div class="step-title">שלב 1 – תשלום (50₪)</div>
+      <div class="step-text" style="margin-bottom:14px;">
+        בנתיים לא צלחתי את האתגר הטכני של סליקה עם כרטיס אשראי 😅<br/>
+        אז יש שתי אפשרויות נוחות:
+      </div>
+      <a href="https://links.payboxapp.com/xBo61NszX3b" target="_blank" class="btn btn-paybox">
+        💳 תשלום דרך פיבוקס ←
+      </a>
+      <div class="step-text" style="text-align:center; font-size:0.85rem; margin: 8px 0;">או</div>
+      <div class="step-text" style="background:rgba(255,255,255,0.04); border-radius:8px; padding:12px;">
+        📲 <strong style="color:#fff;">ביט</strong> למספר <strong style="color:#F0C040;">052-6788944</strong><br/>
+        יש לרשום בהערה: <strong style="color:#fff;">"עבור הרצאה"</strong>
+      </div>
+    </div>
+
+    <!-- הצטרפות לקבוצה -->
+    <div class="step">
+      <div class="step-title">שלב 2 – קבוצת וואטסאפ</div>
+      <div class="step-text" style="margin-bottom:14px;">
+        אחרי התשלום – הצטרפו לקבוצה.<br/>
+        שם תקבלו את לינק הזום ביום האירוע.
+      </div>
+      <a href="https://chat.whatsapp.com/B6bExS3oC5eHolz5BZWUgE?mlu=1&s=cl&p=a" target="_blank" class="btn btn-whatsapp-group">
+        📲 הצטרפות לקבוצת וואטסאפ ←
+      </a>
+    </div>
+
+    <!-- שאלות -->
+    <a href="https://wa.me/972526788944?text=שלום אני מעוניין להירשם לסדנה" target="_blank" class="btn btn-whatsapp-chat">
+      💬 שאלה? שלחו וואטסאפ
+    </a>
+
+    <!-- פרטי האירוע -->
+    <div class="meeting-box">
+      📅 <strong>יום רביעי, 24.6.26</strong> בשעה <strong>20:00</strong><br/>
+      💻 זום – הלינק יישלח בקבוצת הוואטסאפ ביום האירוע
+    </div>
+
+  </div>
+</body>
+</html>
