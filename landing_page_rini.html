@@ -58,7 +58,7 @@ body { font-family: 'Heebo', sans-serif; background: #060D1F; color: #fff; direc
 .hero-transition { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
 .hero-big { font-size: 28px; font-weight: 900; color: #F0C040; margin-bottom: 24px; line-height: 1.2; text-shadow: 0 0 25px rgba(240,192,64,0.4); }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
-.meta-pill { font-size: 13px; font-weight: 900; color: #F0C040; border: 1px solid rgba(240,192,64,0.55); padding: 5px 12px; border-radius: 20px; background: rgba(240,192,64,0.1); }
+.meta-pill { font-size: 17px; font-weight: 900; color: #F0C040; border: 1px solid rgba(240,192,64,0.55); padding: 8px 18px; border-radius: 20px; background: rgba(240,192,64,0.12); }
 .art-circle { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(240,192,64,0.65); box-shadow: 0 0 30px rgba(240,192,64,0.25); }
 .cta-btn { display: inline-block; background: #F0C040; color: #06101F; font-family: 'Heebo', sans-serif; font-size: 16px; font-weight: 900; padding: 14px 32px; border-radius: 8px; border: none; cursor: pointer; }
 .cta-btn:hover { background: #F8D878; }
@@ -268,6 +268,12 @@ body { font-family: 'Heebo', sans-serif; background: #060D1F; color: #fff; direc
           <div class="field"><label>שם מלא</label><input type="text" id="name" placeholder="ישראל ישראלי"></div>
           <div class="field"><label>אימייל</label><input type="email" id="email" placeholder="your@email.com"></div>
           <div class="field"><label>טלפון</label><input type="tel" id="phone" placeholder="050-0000000"></div>
+          <div style="background:rgba(240,192,64,0.08); border:1px solid rgba(240,192,64,0.3); border-radius:12px; padding:16px; margin-bottom:16px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+            <span class="meta-pill">📅 24 ביוני 2026</span>
+            <span class="meta-pill">🕗 20:00</span>
+            <span class="meta-pill">💻 זום</span>
+            <span class="meta-pill">💰 ₪50 בלבד</span>
+          </div>
           <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">שמרו לי מקום ←</button>
           <div class="error-box" id="error-box"></div>
         </div>
@@ -338,9 +344,9 @@ async function handleSubmit() {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorBox.textContent = 'כתובת האימייל אינה תקינה.'; errorBox.style.display = 'block'; return; }
   btn.disabled = true; btn.textContent = 'שולח...';
   try {
-    const res = await fetch('https://pruogkxvrvighbezokgu.supabase.co/rest/v1/webinar_registrations', {
+    const res = await fetch('https://pruogkxvrvighbezokgu.supabase.co/rest/v1/registrations', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': 'sb_publishable_4Ky7aavVeL8oZ-dgumsihQ_eqJrE3gp', 'Authorization': 'Bearer sb_publishable_4Ky7aavVeL8oZ-dgumsihQ_eqJrE3gp', 'Prefer': 'return=minimal' },
+      headers: { 'Content-Type': 'application/json', 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM', 'Prefer': 'return=minimal' },
       body: JSON.stringify({ full_name: name, email, phone })
     });
     if (res.ok || res.status === 201) { document.getElementById('form-area').style.display = 'none'; document.getElementById('success-box').style.display = 'block'; document.getElementById('success-box').scrollIntoView({behavior:'smooth'}); }
