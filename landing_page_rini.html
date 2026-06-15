@@ -364,7 +364,7 @@ async function handleSubmit() {
     const res = await fetch('https://pruogkxvrvighbezokgu.supabase.co/rest/v1/registrations', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ full_name: name, email, phone })
+      body: JSON.stringify({ name, email, phone })
     });
     if (res.ok || res.status === 201) { document.getElementById('form-area').style.display = 'none'; document.getElementById('success-box').style.display = 'block'; document.getElementById('success-box').scrollIntoView({behavior:'smooth'}); }
     else throw new Error('error');
