@@ -379,16 +379,24 @@ async function handleSubmit() {
   if (!name || !email || !phone) { errorBox.textContent = 'אנא מלאו את כל השדות.'; errorBox.style.display = 'block'; return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorBox.textContent = 'כתובת האימייל אינה תקינה.'; errorBox.style.display = 'block'; return; }
   btn.disabled = true; btn.textContent = 'שולח...';
-  try {
-    const res = await fetch('https://pruogkxvrvighbezokgu.supabase.co/rest/v1/registrations', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ name, email, phone })
-    });
-    if (res.ok || res.status === 201) { document.getElementById('form-area').style.display = 'none'; document.getElementById('success-box').style.display = 'block'; document.getElementById('success-box').scrollIntoView({behavior:'smooth'}); }
-    else throw new Error('error');
-  } catch(e) { errorBox.textContent = 'אירעה שגיאה, אנא נסו שוב.'; errorBox.style.display = 'block'; btn.disabled = false; btn.textContent = 'שמרו לי מקום ←'; }
+  const { createClient } = supabase;
+  const _sb = createClient(
+    'https://pruogkxvrvighbezokgu.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydW9na3h2cnZpZ2hiZXpva2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODU5NDIsImV4cCI6MjA5NjU2MTk0Mn0.0qd8iDxx2qaxI9vL6XZkczTZ9UtO8SkadtHXP7DtGCM'
+  );
+  const { error: sbErr } = await _sb.from('registrations').insert({ name, email, phone: phone || null });
+  if (sbErr) {
+    console.error('Supabase error:', sbErr);
+    errorBox.textContent = 'אירעה שגיאה: ' + (sbErr.message || 'נסו שוב');
+    errorBox.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'שמרו לי מקום ←';
+  } else {
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-box').style.display = 'block';
+    document.getElementById('success-box').scrollIntoView({behavior:'smooth'});
+  }
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 </html>
